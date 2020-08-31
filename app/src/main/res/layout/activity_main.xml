@@ -32,7 +32,7 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/x_rounded_16dp_white"
             android:text="Submit"
-
+            android:onClick="toSubmit"
             />
     </RelativeLayout>
 

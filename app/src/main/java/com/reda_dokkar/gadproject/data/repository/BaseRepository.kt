@@ -18,6 +18,7 @@ class BaseRepository {
     private  var gadApi : GadApi
     var learningLiveData : MutableLiveData<ArrayList<LearningItem>> = MutableLiveData()
     var skillLiveData : MutableLiveData<ArrayList<SkillItem>> = MutableLiveData()
+    var submitLiveData : MutableLiveData<Boolean> = MutableLiveData()
 
     init {
         val client = OkHttpClient
@@ -90,4 +91,24 @@ class BaseRepository {
     }
 
 
+    fun submit(email:String,name:String,lastName:String,link:String){
+
+        gadApi.submit(email = email,name = name,lastName = lastName,link = link)
+            .enqueue(object :Callback<Any?>{
+                override fun onFailure(call: Call<Any?>, t: Throwable) {
+                    submitLiveData.value = false
+
+                    Log.e("submit-ok",t.toString())
+
+                }
+
+                override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
+
+                    submitLiveData.value = response.isSuccessful
+
+                    Log.e("submit-ok",response.isSuccessful.toString())
+                }
+            })
+
+    }
 }

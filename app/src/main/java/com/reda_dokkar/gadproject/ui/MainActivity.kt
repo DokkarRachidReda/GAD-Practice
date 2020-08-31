@@ -1,7 +1,9 @@
 package com.reda_dokkar.gadproject.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.tabs.TabLayoutMediator
 import com.reda_dokkar.gadproject.R
 import com.reda_dokkar.gadproject.ui.adapter.ViewPagerAdapter
@@ -23,5 +25,11 @@ class MainActivity : AppCompatActivity() {
                 tab.text = "Skill IQ Leaders"
             }
         }.attach()
+    }
+
+    fun toSubmit(view: View) {
+
+        startActivity(Intent(this,SubmitActivity::class.java))
+
     }
 }
