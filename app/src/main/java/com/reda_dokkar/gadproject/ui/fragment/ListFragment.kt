@@ -5,52 +5,67 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.reda_dokkar.gadproject.R
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.reda_dokkar.gadproject.data.model.Item
+import com.reda_dokkar.gadproject.data.model.LearningItem
+import com.reda_dokkar.gadproject.data.model.SkillItem
+import com.reda_dokkar.gadproject.data.viewModel.BaseVm
+import com.reda_dokkar.gadproject.ui.adapter.ListAdapter
+import com.reda_dokkar.gadproject.ui.adapter.ViewPagerAdapter
+import kotlinx.android.synthetic.main.fragment_list.view.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+class ListFragment : Fragment{
+    private var selection = 0 // 0: top learners , 1 : top iq
+
+    constructor(selection:Int){
+        this.selection = selection
+    }
+
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        val view = inflater.inflate(R.layout.fragment_list, container, false)
+
+
+        val mAdapter = ListAdapter(ArrayList(),activity!!,selection)
+
+
+        view.mRecycler.apply {
+
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+            adapter = mAdapter
         }
+
+        val baseVm  = ViewModelProvider(this).get(BaseVm::class.java)
+
+        if (selection == 0) baseVm.getLearningLeaders() else baseVm.getSkillLeaders()
+
+        if (selection == 0){
+
+            baseVm.getLearningLv().observe(viewLifecycleOwner,
+                Observer<ArrayList<LearningItem>> { t -> mAdapter.updateList(t as ArrayList<Item>) })
+
+        }else{
+
+            baseVm.getSkillLv().observe(viewLifecycleOwner,
+                Observer<ArrayList<SkillItem>> { t -> mAdapter.updateList(t as ArrayList<Item>) })
+
+        }
+
+
+        return view
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false)
-    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic fun newInstance(param1: String, param2: String) =
-                ListFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
-                }
-    }
+
+
 }
