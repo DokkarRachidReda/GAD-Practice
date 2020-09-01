@@ -2,6 +2,7 @@ package com.reda_dokkar.gadproject.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.reda_dokkar.gadproject.R
 
 class SubmitActivity : AppCompatActivity() {
@@ -11,4 +12,6 @@ class SubmitActivity : AppCompatActivity() {
 
 
     }
+
+    fun submit(view: View) {}
 }

@@ -1,9 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:weightSum="10"
     tools:context=".ui.SubmitActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.8"
+        android:paddingHorizontal="12dp"
+        >
+
+        <ImageView
+            android:layout_width="65dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_back_white"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/splash_logo"
+            android:layout_centerInParent="true"
+            android:padding="28dp"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Project Submission"
+        android:textSize="28sp"
+        android:textColor="#FFAB40"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@drawable/x_gradient_black_orange"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="4dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.75"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6.75"
+        android:paddingHorizontal="12dp"
+        android:orientation="vertical"
+        android:weightSum="8"
+        >
+
+        <!-- First row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            >
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.4"
+                android:background="@drawable/x_rounded_4dp_white"
+                android:hint="First name"
+                android:textColor="@color/colorPrimary"
+                android:padding="12dp"
+                android:textSize="18sp"
+                android:textColorHint="#777"
+                android:id="@+id/submit_first_name"
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.4"
+                android:background="@drawable/x_rounded_4dp_white"
+                android:hint="Last name"
+                android:textColor="@color/colorPrimary"
+                android:padding="12dp"
+                android:textSize="18sp"
+                android:textColorHint="#777"
+                android:id="@+id/submit_last_name"
+                />
+        </LinearLayout>
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.75"
+            />
+
+        <!-- 2nd row -->
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/x_rounded_4dp_white"
+            android:hint="Email Address"
+            android:textColor="@color/colorPrimary"
+            android:padding="12dp"
+            android:textSize="18sp"
+            android:textColorHint="#777"
+            android:id="@+id/submit_email"
+            />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.75"
+            />
+
+        <!-- 3rd row -->
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/x_rounded_4dp_white"
+            android:hint="Project on Github (link)"
+            android:textColor="@color/colorPrimary"
+            android:padding="12dp"
+            android:textSize="18sp"
+            android:textColorHint="#777"
+            android:id="@+id/submit_link"
+            />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+
+        <!-- button -->
+
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.75"
+            android:layout_gravity="center"
+            android:background="@drawable/x_rounded_20dp_orange"
+            android:text="Submit"
+            android:textColor="#fff"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-medium"
+            android:onClick="submit"
+            />
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
