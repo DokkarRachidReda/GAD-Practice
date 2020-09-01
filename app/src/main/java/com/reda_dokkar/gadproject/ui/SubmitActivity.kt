@@ -14,4 +14,5 @@ class SubmitActivity : AppCompatActivity() {
     }
 
     fun submit(view: View) {}
+    fun back(view: View) {}
 }
