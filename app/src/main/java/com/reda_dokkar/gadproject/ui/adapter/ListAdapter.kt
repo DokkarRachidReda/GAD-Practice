@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,8 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>{
     private var list:ArrayList<Item>
     private val context:Context
     private val selection:Int
+
+    var lastIndex = 0
 
     constructor(list:ArrayList<Item>,context: Context,selection:Int){
         this.list = list
@@ -67,6 +70,18 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHolder>{
             holder.content.text = "${item.score} Skill IQ Score,${item.country}"
 
         }
+
+
+        if(position > lastIndex){
+            val anim = AnimationUtils.loadAnimation(context,R.anim.top_to_bottom)
+            holder.itemView.startAnimation(anim)
+        }else{
+            val anim = AnimationUtils.loadAnimation(context,R.anim.bottom_to_top)
+            holder.itemView.startAnimation(anim)
+        }
+
+        lastIndex = position
+
     }
 
 
