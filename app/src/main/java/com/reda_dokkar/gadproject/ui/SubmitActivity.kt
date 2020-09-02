@@ -34,13 +34,12 @@ class SubmitActivity : AppCompatActivity() {
                 mDialog.setCancelable(true)
                 mDialog.setCanceledOnTouchOutside(true)
 
-                if(it){
-                    dialogView.dialog_res_img.setImageResource(R.drawable.ic_done)
-
-                }else{
+                if(!it){
                     dialogView.dialog_res_img.setImageResource(R.drawable.ic_error)
                     dialogView.dialog_res_txt.text = "Submission not successful"
                 }
+
+                mDialog.show()
 
 
 
