@@ -2,6 +2,7 @@ package com.reda_dokkar.gadproject.data.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.GsonBuilder
 import com.reda_dokkar.gadproject.data.api.GadApi
 import com.reda_dokkar.gadproject.data.apiUrl
 import com.reda_dokkar.gadproject.data.model.LearningItem
@@ -12,6 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 class BaseRepository {
 
@@ -24,9 +26,10 @@ class BaseRepository {
         val client = OkHttpClient
             .Builder()
             .build()
+        val gson = GsonBuilder().setLenient().create()
         val retrofit = Retrofit.Builder()
             .baseUrl(apiUrl)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()
         gadApi = retrofit.create(GadApi::class.java)
@@ -94,19 +97,20 @@ class BaseRepository {
     fun submit(email:String,name:String,lastName:String,link:String){
 
         gadApi.submit(email = email,name = name,lastName = lastName,link = link)
-            .enqueue(object :Callback<Any?>{
-                override fun onFailure(call: Call<Any?>, t: Throwable) {
+            .enqueue(object :Callback<Void>{
+                override fun onFailure(call: Call<Void>, t: Throwable) {
                     submitLiveData.value = false
 
-                    Log.e("submit-ok",t.toString())
+                    Log.e("submit-error",t.toString())
 
                 }
 
-                override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
 
                     submitLiveData.value = response.isSuccessful
 
                     Log.e("submit-ok",response.isSuccessful.toString())
+                    Log.e("submit-ok",response.body().toString())
                 }
             })
 

@@ -24,5 +24,5 @@ interface GadApi {
                 @Field("entry.1877115667") name:String,
                 @Field("entry.2006916086") lastName:String,
                 @Field("entry.284483984") link:String
-    ) :  Call<Any?>
+    ) :  Call<Void>
 }
